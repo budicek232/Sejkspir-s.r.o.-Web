@@ -1,0 +1,172 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.header a{
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+}
+
+.header a:hover{
+    color: rgb(88, 88, 88);
+}
+
+.header{
+    width: 100%;
+    display: flex;
+    border-bottom: 3px solid black;
+    height: 100px;
+    align-items: center;
+}
+
+.header__logo-section{
+    width: 40%;
+    justify-content: center;
+}
+
+.header div{
+    display: flex;
+    align-items: center;
+}
+
+.header__links-section{
+    padding-left: 20%;
+    width: 60%;
+    gap: 60px;
+}
+
+.header img{
+    width: 50px;
+}
+
+.footer {
+    display: flex;
+    flex-direction: column;
+    height: 180px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    background-color: #111;
+    color: #eee;
+    padding: 50px 20px 20px;
+}
+
+.footer-container {
+  display: grid;
+  gap: 30px;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+}
+
+.footer h3, .footer h4 {
+  color: #fff;
+}
+
+.footer a {
+  color: #9ee37d;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 0.9rem;
+  color: #aaa;
+  border-top: 1px solid #333;
+  padding-top: 15px;
+}   
+
+.footer__navigation ul{
+    display: flex;
+    gap: 30px;
+}
+
+
+.header__links-section a.active {
+  text-decoration: underline    ;
+  color: #9ee37d;
+  font-weight: 600;
+}
+
+@media (max-width: 992px) {
+  .header {
+    flex-direction: column;
+    height: auto;
+    padding: 20px;
+  }
+
+  .header__logo-section {
+    justify-content: center;
+  }
+
+  .header__links-section {
+    gap: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 15px;
+  }
+
+  .header__links-section a {
+    font-size: 18px;
+  }
+
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer__navigation ul {
+    gap: 20px;
+  }
+}
+
+/* 🟠 Mobily (do 600px) */
+@media (max-width: 600px) {
+  .header {
+    padding: 15px;
+  }
+
+  .header__logo-section h2 {
+    font-size: 22px;
+  }
+
+  .header__links-section {
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 10px;
+    padding: 0;
+  }
+
+  .header__links-section a {
+    font-size: 16px;
+  }     
+
+  .footer {
+    padding: 30px 15px;
+    height: 
+    380px;
+  }
+
+  .footer-container {
+    gap: 20px;
+  }
+
+  .footer__navigation ul{
+    flex-direction: column;
+  }
+
+  .footer-bottom {
+    font-size: 0.8rem;
+  }
+}
+
