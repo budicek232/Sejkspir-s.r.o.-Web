@@ -1,0 +1,170 @@
+[
+  {
+    "nazev": "Čokoláda",
+    "popis": "Čokoláda, mléko, kakao",
+    "detaily": "Hříšně jemný shake z pravé kakao-lásky. Lahodná čokoláda rozpuštěná do hladkého mléka – sladké pokušení, které pohladí duši.",
+    "kategorie": "Klasické shaky",
+    "cena": 89,
+    "obrazek": "images/shaky/cokolada.png"
+  },
+  {
+    "nazev": "Jahoda",
+    "popis": "Jahody, mléko, med",
+    "detaily": "Sladká sonáta z čerstvých jahod a sametového mléka. Každý lok je letní polibek, co se rozplyne dřív, než stihneš říct ‚Romeo!‘",
+    "kategorie": "Klasické shaky",
+    "cena": 89,
+    "obrazek": "images/shaky/jahoda.png"
+  },
+  {
+    "nazev": "Banán",
+    "popis": "Banán, mléko, vanilka",
+    "detaily": "Krémový duet banánu a mléka s lehkou notou vanilky. Přirozeně sladký, osvěžující a ideální společník pro každodenní drama.",
+    "kategorie": "Klasické shaky",
+    "cena": 89,
+    "obrazek": "images/shaky/banan.png"
+  },
+  {
+    "nazev": "Sonet o mangu",
+    "popis": "Mango, kokosové mléko, ananas",
+    "detaily": "Exotický sonet chutí – svěží mango s kapkou kokosového mléka a ananasem, který roztančí každý letní den.",
+    "kategorie": "Ovocné shaky – Letní sonety",
+    "cena": 89,
+    "obrazek": "images/shaky/sonet_o_mangu.png"
+  },
+  {
+    "nazev": "Růžová Julie",
+    "popis": "Jahody, maliny, růžová voda, mandlové mléko",
+    "detaily": "Romantická kombinace jahod, malin a růžové vody s mandlovým mlékem – shake, který chutná jako první láska.",
+    "kategorie": "Ovocné shaky – Letní sonety",
+    "cena": 89,
+    "obrazek": "images/shaky/ruzvova_julie.png"
+  },
+  {
+    "nazev": "Zelený princ",
+    "popis": "Špenát, banán, jablko, kiwi, limetka",
+    "detaily": "Zelený elixír plný energie. Osvěžující mix špenátu, jablka, kiwi a limetky doplněný banánem pro jemnost.",
+    "kategorie": "Ovocné shaky – Letní sonety",
+    "cena": 85,
+    "obrazek": "images/shaky/zeleny_princ.png"
+  },
+  {
+    "nazev": "Letní sen",
+    "popis": "Broskev, marakuja, pomerančový džus",
+    "detaily": "Sladký sen o létě – broskev, marakuja a pomerančový džus v harmonickém spojení chutí, které osvěží i v největším vedru.",
+    "kategorie": "Ovocné shaky – Letní sonety",
+    "cena": 89,
+    "obrazek": "images/shaky/letni_sen.png"
+  },
+  {
+    "nazev": "Tropická bouře",
+    "popis": "Mango, banán, kokos, ananas, chia",
+    "detaily": "Když se tropy probudí – mango, banán, kokos a ananas s chia semínky. Bouře chutí, po které zůstane jen úsměv.",
+    "kategorie": "Ovocné shaky – Letní sonety",
+    "cena": 95,
+    "obrazek": "images/shaky/tropicka_boure.png"
+  },
+  {
+    "nazev": "Hamletův hněv",
+    "popis": "Čokoláda, arašídové máslo, protein, ovesné mléko",
+    "detaily": "Intenzivní proteinový zážitek – temná čokoláda a arašídové máslo v ovesném mléce. Shake, který utiší i Hamletův hněv.",
+    "kategorie": "Proteinové shaky – Síla Hamleta",
+    "cena": 105,
+    "obrazek": "images/shaky/hamletuv_hnev.png"
+  },
+  {
+    "nazev": "Macbeth Mass",
+    "popis": "Banán, datle, vanilkový protein, skořice",
+    "detaily": "Síla, která nezná slitování. Banán, datle a skořice v doprovodu vanilkového proteinu – dokonalý tréninkový spojenec.",
+    "kategorie": "Proteinové shaky – Síla Hamleta",
+    "cena": 105,
+    "obrazek": "images/shaky/macbeth_mass.png"
+  },
+  {
+    "nazev": "Othellův ořech",
+    "popis": "Lískový ořech, kakao, protein, rýžové mléko",
+    "detaily": "Temná noblesa lískového ořechu s kakaem a proteinem v rýžovém mléce. Shake, který má hloubku i charakter.",
+    "kategorie": "Proteinové shaky – Síla Hamleta",
+    "cena": 109,
+    "obrazek": "images/shaky/othelluv_orech.jpg"
+  },
+  {
+    "nazev": "Romeovo ráno",
+    "popis": "Jahoda, vanilka, řecký jogurt, med",
+    "detaily": "Sladké probuzení – jahody, vanilka, jogurt a med v něžné harmonii. Ideální začátek dne pro každého Romea.",
+    "kategorie": "Proteinové shaky – Síla Hamleta",
+    "cena": 99,
+    "obrazek": "images/shaky/romeovo_rano.jpg"
+  },
+  {
+    "nazev": "Shakes-gain",
+    "popis": "Cookies & cream protein, mandlové mléko, banán",
+    "detaily": "Silák mezi shaky – protein s příchutí cookies & cream, doplněný banánem a mandlovým mlékem pro maximální nárůst i chuť.",
+    "kategorie": "Proteinové shaky – Síla Hamleta",
+    "cena": 109,
+    "obrazek": "images/shaky/shakes-gain.jpg"
+  },
+  {
+    "nazev": "Sen noci čokoládové",
+    "popis": "Čokoláda, smetana, kokos",
+    "detaily": "Dezertní sen – čokoláda, smetana a kokos v božské kombinaci. Shake, který chutná jako pohádka na dobrou noc.",
+    "kategorie": "Dezertní shaky – Sladké drama",
+    "cena": 95,
+    "obrazek": "images/shaky/sen_noci_cokoladove.png"
+  },
+  {
+    "nazev": "Karamelová tragédie",
+    "popis": "Slaný karamel, banán, mléko",
+    "detaily": "Sladko-slané pokušení – karamelová tragédie, která dopadne šťastně. Banán a mléko dodají dokonalou rovnováhu.",
+    "kategorie": "Dezertní shaky – Sladké drama",
+    "cena": 95,
+    "obrazek": "images/shaky/karamelova_tragedie.png"
+  },
+  {
+    "nazev": "Medový sen",
+    "popis": "Med, vanilka, mandle, mléko",
+    "detaily": "Jemný a sladký shake s medem, mandlovým dotekem a vůní vanilky. Ideální dezertní tečka po jakémkoli příběhu.",
+    "kategorie": "Dezertní shaky – Sladké drama",
+    "cena": 92,
+    "obrazek": "images/shaky/medovy_sen.png"
+  },
+  {
+    "nazev": "Láska na první lok",
+    "popis": "Jahody, bílá čokoláda, smetana",
+    "detaily": "Neodolatelná kombinace jahod, bílé čokolády a smetany. Každý lok je jako první polibek – sladký a nezapomenutelný.",
+    "kategorie": "Dezertní shaky – Sladké drama",
+    "cena": 95,
+    "obrazek": "images/shaky/laska_na_prvni_lok.png"
+  },
+  {
+    "nazev": "Veggie Verona",
+    "popis": "Špenát, avokádo, jablko, citron",
+    "detaily": "Zdravá Verona v zeleném kabátku – špenát, avokádo, jablko a kapka citronu. Lehké, svěží a plné živin.",
+    "kategorie": "Healthy & Vegan – Zdravý epilog",
+    "cena": 89,
+    "obrazek": "images/shaky/veggie_verona.png"
+  },
+  {
+    "nazev": "Bio Bard",
+    "popis": "Borůvky, mandlové mléko, chia semínka",
+    "detaily": "Borůvkový bard mezi shaky – bio energie, jemné mandlové mléko a chia pro dokonalou rovnováhu těla i ducha.",
+    "kategorie": "Healthy & Vegan – Zdravý epilog",
+    "cena": 92,
+    "obrazek": "images/shaky/bio_bard.png"
+  },
+  {
+    "nazev": "Forest Flow",
+    "popis": "Lesní ovoce, kokosová voda, datle",
+    "detaily": "Přírodní harmonie – lesní ovoce a kokosová voda doplněné datlemi. Shake, který tě přenese do svěžího lesa.",
+    "kategorie": "Healthy & Vegan – Zdravý epilog",
+    "cena": 89,
+    "obrazek": "images/shaky/forest_flow.png"
+  },
+  {
+    "nazev": "Zen Shake",
+    "popis": "Matcha, kokos, banán, mandlové mléko",
+    "detaily": "Vyváženost v každém doušku – matcha, kokos, banán a mandlové mléko v harmonickém spojení chutí i energie.",
+    "kategorie": "Healthy & Vegan – Zdravý epilog",
+    "cena": 99,
+    "obrazek": "images/shaky/zen_shake.png"
+  }
+]

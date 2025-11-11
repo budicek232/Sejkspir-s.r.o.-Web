@@ -2,23 +2,23 @@
 const slidesData = [
   {
     image: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1600&q=80',
-    title: 'Fresh Ingredients',
-    text: 'We provide only the freshest ingredients for your meals.',
-    buttonText: 'Learn More',
+    title: 'Signature Shaky',
+    text: 'Zaručujeme pečlivě připravené chutě a bohaté složení.',
+    buttonText: 'Navštiv naši nabídku',
     buttonLink: '#'
   },
   {
-    image: 'https://images.unsplash.com/photo-1524593119773-32061b40b7b5?auto=format&fit=crop&w=1600&q=80',
-    title: 'Delicious Recipes',
-    text: 'Explore our wide range of delicious and easy-to-make recipes.',
-    buttonText: 'View Recipes',
+    image: 'images/ChatGPT Image Nov 11, 2025, 10_21_20 AM.png',
+    title: 'Čokoláda, banán, jahoda',
+    text: 'Milovníci klasiky zde rozhodně najdou to svoje.',
+    buttonText: 'Navštiv naši nabídku',
     buttonLink: '#'
   },
   {
     image: 'https://images.unsplash.com/photo-1576402187878-974f70cb3f5f?auto=format&fit=crop&w=1600&q=80',
-    title: 'Healthy Meals',
-    text: 'Maintain a healthy lifestyle with our balanced meals.',
-    buttonText: 'Get Started',
+    title: 'Zdravé chutné nápoje',
+    text: 'Objev naší širokou nabídu klasických i speciálních chutí.',
+    buttonText: 'Navštiv naši nabídku',
     buttonLink: '#'
   }
 ];

@@ -17,16 +17,16 @@
     <h2>Naše základní produkty</h2>
     <div class="product-list">
       <a href="#" class="product">
-        <img src="https://via.placeholder.com/150" alt="Produkt 1">
-        <span>Protein Shake</span>
+        <img src="images\Gemini_Generated_Image_n1nt4in1nt4in1nt.png" alt="Produkt 1">
+        <span>Čokoládový Shake</span>
       </a>
       <a href="#" class="product">
-        <img src="https://via.placeholder.com/150" alt="Produkt 2">
-        <span>Energy Shake</span>
+        <img src="images\Gemini_Generated_Image_5sfhj5sfhj5sfhj5.png" alt="Produkt 2">
+        <span>Banánový Shake</span>
       </a>
       <a href="#" class="product">
-        <img src="https://via.placeholder.com/150" alt="Produkt 3">
-        <span>Recovery Shake</span>
+        <img src="images\Gemini_Generated_Image_68603j68603j6860.png" alt="Produkt 3">
+        <span>Jahodový Shake</span>
       </a>
     </div>
   </section>
