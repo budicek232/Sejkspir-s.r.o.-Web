@@ -1,5 +1,6 @@
-<?php include "includes/header.php"; 
-$page = 'onas'; ?>
+<?php
+$page = 'onas'; include "includes/header.php"; 
+?>
 <section class="about-page">
   <h1>O nás</h1>
   <p class="intro">

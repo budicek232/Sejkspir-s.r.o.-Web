@@ -1,25 +1,28 @@
 // JSON data pro slidy
 const slidesData = [
   {
-    image: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1600&q=80',
+    image: 'images/ChatGPT Image Nov 12, 2025, 09_11_04 AM.png',
     title: 'Signature Shaky',
     text: 'Zaručujeme pečlivě připravené chutě a bohaté složení.',
     buttonText: 'Navštiv naši nabídku',
-    buttonLink: '#'
+    buttonLink: '#',
+    slogan: 'Ať chutná či nechutná, toť otázka',
   },
   {
     image: 'images/ChatGPT Image Nov 11, 2025, 10_21_20 AM.png',
     title: 'Čokoláda, banán, jahoda',
     text: 'Milovníci klasiky zde rozhodně najdou to svoje.',
     buttonText: 'Navštiv naši nabídku',
-    buttonLink: '#'
+    buttonLink: '#',
+    slogan: 'Ať chutná či nechutná, toť otázka'
   },
   {
-    image: 'https://images.unsplash.com/photo-1576402187878-974f70cb3f5f?auto=format&fit=crop&w=1600&q=80',
+    image: 'images/ChatGPT Image Nov 12, 2025, 09_12_56 AM.png',
     title: 'Zdravé chutné nápoje',
     text: 'Objev naší širokou nabídu klasických i speciálních chutí.',
     buttonText: 'Navštiv naši nabídku',
-    buttonLink: '#'
+    buttonLink: '#',
+    slogan: 'Ať chutná či nechutná, toť otázka'
   }
 ];
 
@@ -36,7 +39,8 @@ slidesData.forEach((slide, i) => {
   div.innerHTML = `
     <h2>${slide.title}</h2>
     <p>${slide.text}</p>
-    <a href="${slide.buttonLink}" class="button">${slide.buttonText}</a>
+    <a href="nabidka.php" class="button">${slide.buttonText}</a>
+    <h3 class="slogan_text">${slide.slogan}</h3>
   `;
   slidesContainer.appendChild(div);
 
@@ -79,3 +83,31 @@ inds.forEach(ind=>{
 
 // start slideshow
 startSlideShow();
+document.querySelectorAll('.faq-item').forEach(item => {
+  item.addEventListener('click', () => {
+    document.querySelectorAll('.faq-item').forEach(el => {
+      if (el !== item) el.classList.remove('active');
+    });
+    item.classList.toggle('active');
+  });
+});
+
+document.querySelectorAll('.faq-item').forEach(item => {
+  item.addEventListener('click', () => {
+    item.classList.toggle('open');
+  });
+});
+
+// Scroll reveal
+const revealElements = document.querySelectorAll('.scroll-reveal, .reason');
+const revealOnScroll = () => {
+  const triggerBottom = window.innerHeight * 0.85;
+  revealElements.forEach(el => {
+    const boxTop = el.getBoundingClientRect().top;
+    if (boxTop < triggerBottom) {
+      el.classList.add('visible');
+    }
+  });
+};
+window.addEventListener('scroll', revealOnScroll);
+revealOnScroll();

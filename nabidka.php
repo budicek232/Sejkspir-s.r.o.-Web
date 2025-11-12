@@ -3,64 +3,73 @@ error_reporting(E_ALL);
 ini_set("display_errors", 1);
 session_start();
 
-$page = "nabidka";
-include "includes/header.php";
-
+/* ==============================
+   KONFIGURACE A DATA PRODUKTŮ
+============================== */
 $jsonPath = __DIR__ . "/produkty.json";
-if (!file_exists($jsonPath)) {
-    die("produkty.json nenalezen — zkontroluj cestu.");
-}
+if (!file_exists($jsonPath)) die("Chybí soubor produkty.json");
 $produkty = json_decode(file_get_contents($jsonPath), true);
-if (!is_array($produkty)) {
-    die("Chyba: produkty.json není validní JSON nebo neobsahuje pole.");
-}
+if (!is_array($produkty)) die("Chybný formát JSON");
 
-if (!isset($_SESSION["kosik"])) {
-    $_SESSION["kosik"] = [];
-}
+if (!isset($_SESSION["kosik"])) $_SESSION["kosik"] = [];
 
-// --- HANDLERY ---
-if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["pridat"], $_POST["id"])) {
-    $id = intval($_POST["id"]);
-    if (isset($produkty[$id])) {
-        if (!isset($_SESSION["kosik"][$id])) {
-            $_SESSION["kosik"][$id] = [
-                "produkt" => $produkty[$id],
-                "mnozstvi" => 1,
-            ];
-        } else {
-            $_SESSION["kosik"][$id]["mnozstvi"]++;
-        }
-        echo "<script>sessionStorage.setItem('added','true');location.href=location.pathname;</script>";
-        exit();
+/* ==============================
+   AJAX API pro košík (vrací JSON)
+============================== */
+if (isset($_POST["ajax"])) {
+    error_reporting(0);
+    ini_set("display_errors", 0);
+    header("Content-Type: application/json");
+
+    switch ($_POST["ajax"]) {
+        case "add":
+            $id = intval($_POST["id"]);
+            if (isset($produkty[$id])) {
+                if (!isset($_SESSION["kosik"][$id])) {
+                    $_SESSION["kosik"][$id] = [
+                        "produkt" => $produkty[$id],
+                        "mnozstvi" => 1
+                    ];
+                } else {
+                    $_SESSION["kosik"][$id]["mnozstvi"]++;
+                }
+            }
+            break;
+
+        case "remove":
+            $id = intval($_POST["id"]);
+            unset($_SESSION["kosik"][$id]);
+            break;
+
+        case "update":
+            $id = intval($_POST["id"]);
+            $m = max(1, intval($_POST["mnozstvi"]));
+            if (isset($_SESSION["kosik"][$id])) {
+                $_SESSION["kosik"][$id]["mnozstvi"] = $m;
+            }
+            break;
+
+        case "get":
+            break;
     }
+
+    // Součet všech kusů (ne jen druhů)
+    $celkovyPocet = array_sum(array_column($_SESSION["kosik"], "mnozstvi"));
+    $celkovaCena = array_sum(array_map(fn($p) => $p["produkt"]["cena"] * $p["mnozstvi"], $_SESSION["kosik"]));
+
+    echo json_encode([
+        "pocet" => $celkovyPocet,
+        "polozky" => $_SESSION["kosik"],
+        "celkem" => $celkovaCena
+    ]);
+    exit;
 }
 
-if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["remove_id"])) {
-    $rid = intval($_POST["remove_id"]);
-    if (isset($_SESSION["kosik"][$rid])) {
-        unset($_SESSION["kosik"][$rid]);
-    }
-    echo "<script>location.href=location.pathname;</script>";
-    exit();
-}
-
-if (
-    $_SERVER["REQUEST_METHOD"] === "POST" &&
-    isset($_POST["update_mnozstvi"]) &&
-    isset($_POST["mnozstvi"]) &&
-    is_array($_POST["mnozstvi"])
-) {
-    foreach ($_POST["mnozstvi"] as $id => $value) {
-        $iid = intval($id);
-        $m = max(1, intval($value));
-        if (isset($_SESSION["kosik"][$iid])) {
-            $_SESSION["kosik"][$iid]["mnozstvi"] = $m;
-        }
-    }
-    echo "<script>location.href=location.pathname;</script>";
-    exit();
-}
+/* ==============================
+   STRÁNKA - NABÍDKA
+============================== */
+$page = 'nabidka';
+include "includes/header.php";
 ?>
 
 <div class="eshop-container">
@@ -76,22 +85,25 @@ if (
             }
             ?>
         </select>
-        <button id="kosik-btn">🛒 Zobrazit košík (<?php echo count($_SESSION["kosik"]); ?>)</button>
+        <?php
+        $pocetKs = array_sum(array_column($_SESSION["kosik"], "mnozstvi"));
+        ?>
+        <button id="kosik-btn">🛒 Zobrazit košík (<?= $pocetKs ?>)</button>
     </div>
 
     <div class="produkty-grid">
         <?php foreach ($produkty as $index => $produkt): ?>
-            <div class="produkt-card" 
-                 data-kategorie="<?= htmlspecialchars($produkt["kategorie"] ?? "ostatni") ?>" 
+            <div class="produkt-card"
+                 data-kategorie="<?= htmlspecialchars($produkt["kategorie"] ?? "ostatni") ?>"
                  data-detaily="<?= htmlspecialchars($produkt["detaily"] ?? "", ENT_QUOTES) ?>">
 
                 <div class="produkt-img-wrapper" style="position:relative;">
                     <?php if (!empty($produkt["obrazek"])): ?>
                         <img class="produkt-img" src="<?= htmlspecialchars($produkt["obrazek"]) ?>" alt="<?= htmlspecialchars($produkt["nazev"]) ?>">
                     <?php endif; ?>
-                    <form method="post" class="add-form">
+                    <form class="add-form">
                         <input type="hidden" name="id" value="<?= intval($index) ?>">
-                        <button type="submit" name="pridat" class="add-btn">+</button>
+                        <button type="submit" class="add-btn">+</button>
                     </form>
                 </div>
 
@@ -104,54 +116,54 @@ if (
     </div>
 </div>
 
-<!-- MODÁLNÍ OKNO - KOŠÍK -->
+<!-- ================= MODÁLNÍ KOŠÍK ================= -->
 <div id="kosik-modal" class="modal">
     <div class="modal-content">
         <h2>Váš košík</h2>
-        <?php if (!empty($_SESSION["kosik"])): ?>
-            <form method="post">
-                <table class="kosik-table">
-                    <tr>
-                        <th>Produkt</th>
-                        <th>Množství</th>
-                        <th>Cena</th>
-                        <th>Odebrat</th>
-                    </tr>
-                    <?php
-                    $celkem = 0;
-                    foreach ($_SESSION["kosik"] as $id => $polozka):
-                        $cena = floatval($polozka["produkt"]["cena"]) * intval($polozka["mnozstvi"]);
-                        $celkem += $cena;
-                    ?>
-                        <tr>
-                            <td><?= htmlspecialchars($polozka["produkt"]["nazev"]) ?></td>
-                            <td><input type="number" name="mnozstvi[<?= intval($id) ?>]" value="<?= intval($polozka["mnozstvi"]) ?>" min="1"></td>
-                            <td><?= number_format($cena, 2) ?> Kč</td>
-                            <td><button type="submit" name="remove_id" value="<?= intval($id) ?>" class="remove-btn">✕</button></td>
-                        </tr>
-                    <?php endforeach; ?>
-                </table>
-                <div class="celkem">Celkem: <strong><?= number_format($celkem, 2) ?> Kč</strong></div>
-                <button type="submit" name="update_mnozstvi" value="1" class="update-btn">Aktualizovat množství</button>
-            </form>
-        <?php else: ?>
-            <p>Košík je prázdný.</p>
-        <?php endif; ?>
+        <table class="kosik-table">
+            <thead>
+                <tr>
+                    <th>Produkt</th>
+                    <th>Množství</th>
+                    <th>Cena</th>
+                    <th>Odebrat</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <div class="celkem">Celkem: <strong>0 Kč</strong></div>
         <button id="close-modal" class="close-btn">Zavřít</button>
     </div>
 </div>
 
-<!-- MODÁLNÍ OKNO - DETAIL PRODUKTU -->
+<!-- ================= MODÁLNÍ DETAIL PRODUKTU ================= -->
 <div id="detail-modal" class="modal">
     <div class="modal-content">
         <h2 id="detail-title"></h2>
+        <img id="detail-img" src="" alt="" style="max-width:300px;display:block;margin:15px auto;border-radius:10px;">
         <p id="detail-text"></p>
         <button id="close-detail" class="close-btn">Zavřít</button>
     </div>
 </div>
 
 <script>
-// Filtrace kategorií
+/* ===== AJAX Helper ===== */
+async function updateKosik(data) {
+    const res = await fetch(window.location.pathname, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: new URLSearchParams(data)
+    });
+    return res.json();
+}
+
+/* ===== Inicializace proměnných ===== */
+const kosikBtn = document.getElementById('kosik-btn');
+const kosikModal = document.getElementById('kosik-modal');
+const kosikBody = kosikModal.querySelector('.kosik-table tbody');
+const celkemEl = document.querySelector('.celkem strong');
+
+/* ===== Filtrace kategorií ===== */
 document.getElementById('filter').addEventListener('change', function() {
     const kat = this.value;
     document.querySelectorAll('.produkt-card').forEach(card => {
@@ -159,31 +171,108 @@ document.getElementById('filter').addEventListener('change', function() {
     });
 });
 
-// Modal - košík
-const kosikModal = document.getElementById('kosik-modal');
-document.getElementById('kosik-btn').addEventListener('click', e => { e.preventDefault(); kosikModal.style.display = 'flex'; });
-document.getElementById('close-modal').addEventListener('click', () => { kosikModal.style.display = 'none'; });
+/* ===== Zobrazení / zavření modalu ===== */
+kosikBtn.addEventListener('click', async () => {
+    kosikModal.style.display = 'flex';
+    const data = await updateKosik({ajax: 'get'});
+    refreshKosik(data);
+});
+document.getElementById('close-modal').addEventListener('click', () => kosikModal.style.display = 'none');
 
-// Modal - detaily
+/* ===== Přidání do košíku ===== */
+document.querySelectorAll('.add-form').forEach(form => {
+    form.addEventListener('submit', async e => {
+        e.preventDefault();
+        const id = form.querySelector('[name="id"]').value;
+        const data = await updateKosik({ajax: 'add', id});
+        refreshKosik(data);
+        kosikBtn.classList.add('animate');
+        setTimeout(() => kosikBtn.classList.remove('animate'), 400);
+    });
+});
+
+/* ===== Odebrání z košíku ===== */
+document.addEventListener('click', async e => {
+    if (e.target.classList.contains('remove-btn')) {
+        e.preventDefault();
+        const id = e.target.value;
+        const data = await updateKosik({ajax: 'remove', id});
+        refreshKosik(data);
+    }
+});
+
+/* ===== Změna množství ===== */
+document.addEventListener('input', async e => {
+    if (e.target.matches('.kosik-table input[type="number"]')) {
+        const id = e.target.name.match(/\d+/)[0];
+        const mnozstvi = e.target.value;
+        const data = await updateKosik({ajax: 'update', id, mnozstvi});
+        refreshKosik(data);
+    }
+});
+
+/* ===== Překreslení obsahu košíku ===== */
+function refreshKosik(data) {
+    kosikBody.innerHTML = '';
+    for (const [id, p] of Object.entries(data.polozky)) {
+        const cena = p.produkt.cena * p.mnozstvi;
+        const obrazek = p.produkt.obrazek ? `<img src="${p.produkt.obrazek}" alt="" class="kosik-thumb">` : '';
+        kosikBody.innerHTML += `
+          <tr>
+            <td>${obrazek}<span>${p.produkt.nazev}</span></td>
+            <td><input type="number" name="mnozstvi[${id}]" value="${p.mnozstvi}" min="1"></td>
+            <td>${cena.toLocaleString('cs-CZ', {minimumFractionDigits: 2})} Kč</td>
+            <td><button class="remove-btn" value="${id}">✕</button></td>
+          </tr>`;
+    }
+    celkemEl.textContent = data.celkem.toLocaleString('cs-CZ', {minimumFractionDigits: 2}) + ' Kč';
+    kosikBtn.innerHTML = `🛒 Zobrazit košík (${data.pocet})`;
+}
+
+/* ===== Modal - Detaily produktu ===== */
 const detailModal = document.getElementById('detail-modal');
 const detailTitle = document.getElementById('detail-title');
 const detailText = document.getElementById('detail-text');
+const detailImg = document.getElementById('detail-img');
 
 document.querySelectorAll('.detail-btn').forEach(btn => {
     btn.addEventListener('click', e => {
         const card = e.target.closest('.produkt-card');
         detailTitle.textContent = card.querySelector('h3').textContent;
         detailText.textContent = card.dataset.detaily || "Bez detailů.";
+        const imgEl = card.querySelector('.produkt-img');
+        detailImg.src = imgEl ? imgEl.src : '';
+        detailImg.style.display = imgEl ? 'block' : 'none';
         detailModal.style.display = 'flex';
     });
 });
-document.getElementById('close-detail').addEventListener('click', () => { detailModal.style.display = 'none'; });
-
-// Notifikace po přidání
-if (sessionStorage.getItem('added')) {
-    alert('Produkt byl přidán do košíku 🛒');
-    sessionStorage.removeItem('added');
-}
+document.getElementById('close-detail').addEventListener('click', () => detailModal.style.display = 'none');
 </script>
+
+<style>
+#kosik-btn.animate {
+  animation: bounce 0.4s ease;
+}
+@keyframes bounce {
+  0% { transform: scale(1); }
+  30% { transform: scale(1.15); }
+  60% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+/* Mini obrázek v košíku */
+.kosik-thumb {
+  width: 42px;
+  height: 42px;
+  border-radius: 8px;
+  object-fit: cover;
+  margin-right: 10px;
+  vertical-align: middle;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+.kosik-table td span {
+  vertical-align: middle;
+}
+</style>
 
 <?php include "includes/footer.php"; ?>
