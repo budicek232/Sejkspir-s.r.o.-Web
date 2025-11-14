@@ -132,7 +132,11 @@ include "includes/header.php";
             <tbody></tbody>
         </table>
         <div class="celkem">Celkem: <strong>0 Kč</strong></div>
-        <button id="close-modal" class="close-btn">Zavřít</button>
+
+        <div class="modal-actions">
+            <a href="objednavka.php" class="order-btn">Dokončit objednávku →</a>
+            <button id="close-modal" class="close-btn">Zavřít</button>
+        </div>
     </div>
 </div>
 

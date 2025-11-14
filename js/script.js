@@ -26,80 +26,90 @@ const slidesData = [
   }
 ];
 
+
+// =============================
+//  SLIDESHOW – bezpečná verze
+// =============================
 const slidesContainer = document.querySelector('.slides');
 const indicatorsContainer = document.querySelector('.indicators');
 
-// generování slide a indikátorů
-slidesData.forEach((slide, i) => {
-  // slide
-  const div = document.createElement('div');
-  div.classList.add('slide');
-  if(i === 0) div.classList.add('active');
-  div.style.backgroundImage = `url('${slide.image}')`;
-  div.innerHTML = `
-    <h2>${slide.title}</h2>
-    <p>${slide.text}</p>
-    <a href="nabidka.php" class="button">${slide.buttonText}</a>
-    <h3 class="slogan_text">${slide.slogan}</h3>
-  `;
-  slidesContainer.appendChild(div);
+if (slidesContainer && indicatorsContainer) {
 
-  // indikátor
-  const ind = document.createElement('span');
-  ind.classList.add('ind');
-  if(i === 0) ind.classList.add('active');
-  ind.dataset.index = i;
-  indicatorsContainer.appendChild(ind);
-});
+  slidesData.forEach((slide, i) => {
 
-const slides = document.querySelectorAll('.slide');
-const inds = document.querySelectorAll('.ind');
-let current = 0;
-const intervalTime = 5000;
-let slideTimer;
+    // Slide
+    const div = document.createElement('div');
+    div.classList.add('slide');
+    if (i === 0) div.classList.add('active');
+    div.style.backgroundImage = `url('${slide.image}')`;
+    div.innerHTML = `
+      <h2>${slide.title}</h2>
+      <p>${slide.text}</p>
+      <a href="nabidka.php" class="button">${slide.buttonText}</a>
+      <h3 class="slogan_text">${slide.slogan}</h3>
+    `;
+    slidesContainer.appendChild(div);
 
-function showSlide(index){
-  slides.forEach((s,i)=>{
-    s.classList.toggle('active', i===index);
-    inds[i].classList.toggle('active', i===index);
+    // Indikátor
+    const ind = document.createElement('span');
+    ind.classList.add('ind');
+    if (i === 0) ind.classList.add('active');
+    ind.dataset.index = i;
+    indicatorsContainer.appendChild(ind);
   });
-  current = index;
+
+  const slides = document.querySelectorAll('.slide');
+  const inds = document.querySelectorAll('.ind');
+  let current = 0;
+  const intervalTime = 5000;
+  let slideTimer;
+
+  function showSlide(index){
+    slides.forEach((s,i)=>{
+      s.classList.toggle('active', i === index);
+      inds[i].classList.toggle('active', i === index);
+    });
+    current = index;
+  }
+
+  function startSlideShow(){
+    slideTimer = setInterval(()=>{
+      let next = (current + 1) % slides.length;
+      showSlide(next);
+    }, intervalTime);
+  }
+
+  inds.forEach(ind=>{
+    ind.addEventListener('click', ()=>{
+      clearInterval(slideTimer);
+      showSlide(parseInt(ind.dataset.index));
+      startSlideShow();
+    });
+  });
+
+  startSlideShow();
 }
 
-function startSlideShow(){
-  slideTimer = setInterval(()=>{
-    let next = (current+1)%slides.length;
-    showSlide(next);
-  }, intervalTime);
-}
 
-inds.forEach(ind=>{
-  ind.addEventListener('click', ()=>{
-    clearInterval(slideTimer);
-    showSlide(parseInt(ind.dataset.index));
-    startSlideShow();
-  });
-});
-
-// start slideshow
-startSlideShow();
+// =============================
+// FAQ
+// =============================
 document.querySelectorAll('.faq-item').forEach(item => {
   item.addEventListener('click', () => {
     document.querySelectorAll('.faq-item').forEach(el => {
       if (el !== item) el.classList.remove('active');
     });
     item.classList.toggle('active');
-  });
-});
-
-document.querySelectorAll('.faq-item').forEach(item => {
-  item.addEventListener('click', () => {
     item.classList.toggle('open');
   });
 });
 
+
+// =============================
 // Scroll reveal
+// =============================
 const revealElements = document.querySelectorAll('.scroll-reveal, .reason');
+
 const revealOnScroll = () => {
   const triggerBottom = window.innerHeight * 0.85;
   revealElements.forEach(el => {
@@ -109,5 +119,35 @@ const revealOnScroll = () => {
     }
   });
 };
+
 window.addEventListener('scroll', revealOnScroll);
 revealOnScroll();
+
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const menuToggle = document.getElementById("menuToggle");
+    const navMenu = document.getElementById("navMenu");
+
+    if (!menuToggle || !navMenu) {
+        console.error("❌ menuToggle nebo navMenu nebyly nalezeny v DOM.");
+        return;
+    }
+
+    // toggle hamburger menu
+    menuToggle.addEventListener("click", () => {
+        menuToggle.classList.toggle("active");
+        navMenu.classList.toggle("open");
+        document.body.classList.toggle("lock-scroll"); // zakáže scroll při otevření
+    });
+
+    // zavření při kliknutí na link
+    navMenu.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => {
+            menuToggle.classList.remove("active");
+            navMenu.classList.remove("open");
+            document.body.classList.remove("lock-scroll");
+        });
+    });
+});
+

@@ -46,7 +46,7 @@
       <input type="text" name="name" placeholder="Vaše jméno" required>
       <input type="email" name="email" placeholder="Váš e-mail" required>
       <textarea name="message" placeholder="Vaše zpráva" rows="5" required></textarea>
-      <button type="submit">Odeslat</button>
+      <button class="submit" type="submit">Odeslat</button>
     </form>
   </section>
 <?php include "includes/footer.php" ?>
