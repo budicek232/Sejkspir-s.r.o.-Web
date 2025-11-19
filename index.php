@@ -5,13 +5,13 @@ include "includes/header.php";
 
 <main>
 
-  <!-- Hero sekce se sliderem -->
+
   <section class="hero">
     <div class="slides"></div>
     <div class="indicators"></div>
   </section>
 
-  <!-- Produkty -->
+
   <section class="products">
     <h2>Naše základní produkty</h2>
     <div class="product-list">
@@ -30,7 +30,7 @@ include "includes/header.php";
     </div>
   </section>
 
-  <!-- Proč si vybrat Šejkspír -->
+
   <section class="why-us">
     <h2>Proč si vybrat Šejkspír</h2>
     <div class="reasons">
@@ -52,7 +52,7 @@ include "includes/header.php";
     </div>
   </section>
 
-  <!-- Co je Šejkspír -->
+
   <section class="about">
     <h2>Co je Šejkspír</h2>
     <p>
@@ -61,7 +61,7 @@ include "includes/header.php";
     </p>
   </section>
 
-  <!-- Složení -->
+
   <section class="composition">
     <h2>Složení šejků</h2>
     <p>
@@ -71,7 +71,7 @@ include "includes/header.php";
     </p>
   </section>
 
-  <!-- FAQ -->
+
   <section class="faq">
     <h2>FAQ</h2>
     <div class="faq-item">
@@ -88,7 +88,7 @@ include "includes/header.php";
     </div>
   </section>
 
-  <!-- CTA Kontakt -->
+
   <section class="contact-cta">
     <h2>Máte otázky?</h2>
     <p>Kontaktujte nás a my vám rádi poradíme s výběrem.</p>

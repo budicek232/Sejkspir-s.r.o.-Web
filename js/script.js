@@ -1,4 +1,4 @@
-// JSON data pro slidy
+
 const slidesData = [
   {
     image: 'images/ChatGPT Image Nov 12, 2025, 09_11_04 AM.png',
@@ -26,10 +26,6 @@ const slidesData = [
   }
 ];
 
-
-// =============================
-//  SLIDESHOW – bezpečná verze
-// =============================
 const slidesContainer = document.querySelector('.slides');
 const indicatorsContainer = document.querySelector('.indicators');
 
@@ -37,7 +33,6 @@ if (slidesContainer && indicatorsContainer) {
 
   slidesData.forEach((slide, i) => {
 
-    // Slide
     const div = document.createElement('div');
     div.classList.add('slide');
     if (i === 0) div.classList.add('active');
@@ -50,7 +45,6 @@ if (slidesContainer && indicatorsContainer) {
     `;
     slidesContainer.appendChild(div);
 
-    // Indikátor
     const ind = document.createElement('span');
     ind.classList.add('ind');
     if (i === 0) ind.classList.add('active');
@@ -91,9 +85,6 @@ if (slidesContainer && indicatorsContainer) {
 }
 
 
-// =============================
-// FAQ
-// =============================
 document.querySelectorAll('.faq-item').forEach(item => {
   item.addEventListener('click', () => {
     document.querySelectorAll('.faq-item').forEach(el => {
@@ -105,9 +96,6 @@ document.querySelectorAll('.faq-item').forEach(item => {
 });
 
 
-// =============================
-// Scroll reveal
-// =============================
 const revealElements = document.querySelectorAll('.scroll-reveal, .reason');
 
 const revealOnScroll = () => {
@@ -130,18 +118,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const navMenu = document.getElementById("navMenu");
 
     if (!menuToggle || !navMenu) {
-        console.error("❌ menuToggle nebo navMenu nebyly nalezeny v DOM.");
+        console.error("menuToggle nebo navMenu nebyly nalezeny v DOM.");
         return;
     }
 
-    // toggle hamburger menu
+
     menuToggle.addEventListener("click", () => {
         menuToggle.classList.toggle("active");
         navMenu.classList.toggle("open");
-        document.body.classList.toggle("lock-scroll"); // zakáže scroll při otevření
+        document.body.classList.toggle("lock-scroll");
     });
 
-    // zavření při kliknutí na link
     navMenu.querySelectorAll("a").forEach(link => {
         link.addEventListener("click", () => {
             menuToggle.classList.remove("active");

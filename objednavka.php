@@ -3,17 +3,11 @@ error_reporting(E_ALL);
 ini_set("display_errors", 1);
 session_start();
 
-/* ==============================
-   NEMÁŠ KOŠÍK → NEMŮŽEŠ OBJEDNAT
-============================== */
 if (!isset($_SESSION["kosik"]) || empty($_SESSION["kosik"])) {
     header("Location: nabidka.php");
     exit;
 }
 
-/* ==============================
-   ODESLÁNÍ OBJEDNÁVKY (FORMULÁŘ)
-============================== */
 
 $success = false;
 $error = "";
@@ -29,20 +23,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if ($jmeno && $email && $telefon && $adresa) {
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
 
-            // =============================
-            //      SESTAVENÍ EMAILU
-            // =============================
-            $to = "sejkspir123@gmail.com";  // ↓ Tady můžeš změnit přijímací email
+            $to = "sejkspir123@gmail.com";
             $subject = "Nová objednávka – Šejkspír";
 
-            $body = "📦 NOVÁ OBJEDNÁVKA\n\n";
-            $body .= "👤 Jméno: $jmeno\n";
-            $body .= "📧 Email: $email\n";
-            $body .= "📞 Telefon: $telefon\n";
-            $body .= "🏠 Adresa: $adresa\n\n";
-            $body .= "📝 Poznámka:\n$poznamka\n\n";
+            $body = "NOVÁ OBJEDNÁVKA\n\n";
+            $body .= "Jméno: $jmeno\n";
+            $body .= "Email: $email\n";
+            $body .= "Telefon: $telefon\n";
+            $body .= "Adresa: $adresa\n\n";
+            $body .= "Poznámka:\n$poznamka\n\n";
             $body .= "===========================\n";
-            $body .= "🛒 OBSAH OBJEDNÁVKY:\n\n";
+            $body .= "OBSAH OBJEDNÁVKY:\n\n";
 
             foreach ($_SESSION["kosik"] as $p) {
                 $body .= "- {$p["produkt"]["nazev"]} ({$p["mnozstvi"]} ks) – "
@@ -60,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             if (mail($to, $subject, $body, $headers)) {
                 $success = true;
-                $_SESSION["kosik"] = []; // vyprázdnit košík
+                $_SESSION["kosik"] = [];
             } else {
                 $error = "Objednávku se nepodařilo odeslat. Zkus to prosím později.";
             }
@@ -80,7 +71,7 @@ include "includes/header.php";
 
     <?php if ($success): ?>
         <div class="order-success">
-            <h2>🎉 Objednávka byla úspěšně odeslána!</h2>
+            <h2> Objednávka byla úspěšně odeslána!</h2>
             <p>Ozveme se ti co nejdříve.</p>
             <a href="nabidka.php" class="btn-primary">Zpět do nabídky</a>
         </div>
@@ -90,7 +81,6 @@ include "includes/header.php";
 
     <div class="order-wrapper">
 
-        <!-- ======================== FORMULÁŘ ======================== -->
         <div class="order-form">
             <h2>Kontaktní údaje</h2>
 
@@ -120,7 +110,6 @@ include "includes/header.php";
             </form>
         </div>
 
-        <!-- ======================== SOUHRN OBJEDNÁVKY ======================== -->
         <div class="order-summary">
             <h2>Souhrn objednávky</h2>
 

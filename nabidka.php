@@ -88,7 +88,7 @@ include "includes/header.php";
         <?php
         $pocetKs = array_sum(array_column($_SESSION["kosik"], "mnozstvi"));
         ?>
-        <button id="kosik-btn">🛒 Zobrazit košík (<?= $pocetKs ?>)</button>
+        <button id="kosik-btn">🛒 <span class="kosik_text">Zobrazit košík</span> (<?= $pocetKs ?>)</button>
     </div>
 
     <div class="produkty-grid">
@@ -116,7 +116,6 @@ include "includes/header.php";
     </div>
 </div>
 
-<!-- ================= MODÁLNÍ KOŠÍK ================= -->
 <div id="kosik-modal" class="modal">
     <div class="modal-content">
         <h2>Váš košík</h2>
@@ -140,7 +139,6 @@ include "includes/header.php";
     </div>
 </div>
 
-<!-- ================= MODÁLNÍ DETAIL PRODUKTU ================= -->
 <div id="detail-modal" class="modal">
     <div class="modal-content">
         <h2 id="detail-title"></h2>
@@ -151,7 +149,7 @@ include "includes/header.php";
 </div>
 
 <script>
-/* ===== AJAX Helper ===== */
+
 async function updateKosik(data) {
     const res = await fetch(window.location.pathname, {
         method: 'POST',
@@ -161,13 +159,12 @@ async function updateKosik(data) {
     return res.json();
 }
 
-/* ===== Inicializace proměnných ===== */
+
 const kosikBtn = document.getElementById('kosik-btn');
 const kosikModal = document.getElementById('kosik-modal');
 const kosikBody = kosikModal.querySelector('.kosik-table tbody');
 const celkemEl = document.querySelector('.celkem strong');
 
-/* ===== Filtrace kategorií ===== */
 document.getElementById('filter').addEventListener('change', function() {
     const kat = this.value;
     document.querySelectorAll('.produkt-card').forEach(card => {
@@ -175,7 +172,6 @@ document.getElementById('filter').addEventListener('change', function() {
     });
 });
 
-/* ===== Zobrazení / zavření modalu ===== */
 kosikBtn.addEventListener('click', async () => {
     kosikModal.style.display = 'flex';
     const data = await updateKosik({ajax: 'get'});
@@ -183,7 +179,6 @@ kosikBtn.addEventListener('click', async () => {
 });
 document.getElementById('close-modal').addEventListener('click', () => kosikModal.style.display = 'none');
 
-/* ===== Přidání do košíku ===== */
 document.querySelectorAll('.add-form').forEach(form => {
     form.addEventListener('submit', async e => {
         e.preventDefault();
@@ -195,7 +190,6 @@ document.querySelectorAll('.add-form').forEach(form => {
     });
 });
 
-/* ===== Odebrání z košíku ===== */
 document.addEventListener('click', async e => {
     if (e.target.classList.contains('remove-btn')) {
         e.preventDefault();
@@ -205,7 +199,6 @@ document.addEventListener('click', async e => {
     }
 });
 
-/* ===== Změna množství ===== */
 document.addEventListener('input', async e => {
     if (e.target.matches('.kosik-table input[type="number"]')) {
         const id = e.target.name.match(/\d+/)[0];
@@ -215,7 +208,6 @@ document.addEventListener('input', async e => {
     }
 });
 
-/* ===== Překreslení obsahu košíku ===== */
 function refreshKosik(data) {
     kosikBody.innerHTML = '';
     for (const [id, p] of Object.entries(data.polozky)) {
@@ -233,7 +225,6 @@ function refreshKosik(data) {
     kosikBtn.innerHTML = `🛒 Zobrazit košík (${data.pocet})`;
 }
 
-/* ===== Modal - Detaily produktu ===== */
 const detailModal = document.getElementById('detail-modal');
 const detailTitle = document.getElementById('detail-title');
 const detailText = document.getElementById('detail-text');
@@ -264,7 +255,6 @@ document.getElementById('close-detail').addEventListener('click', () => detailMo
   100% { transform: scale(1); }
 }
 
-/* Mini obrázek v košíku */
 .kosik-thumb {
   width: 42px;
   height: 42px;

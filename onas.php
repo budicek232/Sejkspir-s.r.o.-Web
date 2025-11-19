@@ -10,25 +10,25 @@ $page = 'onas'; include "includes/header.php";
     <div class="team-member">
       <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Josef Šindelář">
       <h3>Josef Šindelář</h3>
-      <span>CEO & Founder</span>
+      <span>Ředitel firmy</span>
       <p>Jan je zakladatel a vizionář naší firmy. Má více než 15 let zkušeností v oboru.</p>
     </div>
     <div class="team-member">
       <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Filip Podhradský">
-      <h3>Filip Podhradský</h3>
+      <h3>Ředitel marketingu</h3>
       <span>CEO & Founder</span>
       <p>Jan je zakladatel a vizionář naší firmy. Má více než 15 let zkušeností v oboru.</p>
     </div>
     <div class="team-member">
       <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Vojtěch Budka">
       <h3>Vojtěch Budka</h3>
-      <span>CEO & Founder</span>
+      <span>Marketér</span>
       <p>Jan je zakladatel a vizionář naší firmy. Má více než 15 let zkušeností v oboru.</p>
     </div>
     <div class="team-member">
       <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Jan Fiala">
       <h3>Jan Fiala</h3>
-      <span>CEO & Founder</span>
+      <span>Jednatel</span>
       <p>Jan je zakladatel a vizionář naší firmy. Má více než 15 let zkušeností v oboru.</p>
     </div>
     <div class="team-member">
@@ -46,7 +46,7 @@ $page = 'onas'; include "includes/header.php";
     <div class="team-member">
       <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Václav Dufek">
       <h3>Václav Dufek</h3>
-      <span>CEO & Founder</span>
+      <span>Vicepresident</span>
       <p>Jan je zakladatel a vizionář naší firmy. Má více než 15 let zkušeností v oboru.</p>
     </div>
 

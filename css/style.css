@@ -1,6 +1,4 @@
-/* ============================= */
-/*       RESET & ZÁKLAD          */
-/* ============================= */
+
 * {
 	box-sizing: border-box;
 	margin: 0;
@@ -28,9 +26,6 @@ main {
 	flex: 1;
 }
 
-/* ============================= */
-/*          HEADER               */
-/* ============================= */
 .header {
 	width: 100%;
 	display: flex;
@@ -41,6 +36,8 @@ main {
 	background: #ffffff;
 	border-bottom: 1px solid #e6e6e6;
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+	position: fixed;
+	z-index: 9999;
 }
 
 .header__logo-section img {
@@ -80,9 +77,7 @@ main {
 	border-bottom: 2px solid #1abc9c;
 }
 
-/* ============================= */
-/*           HERO / SLIDER       */
-/* ============================= */
+
 .hero {
 	position: relative;
 	width: 100%;
@@ -210,14 +205,13 @@ main {
 	transform: scale(1.3);
 }
 
-/* ============================= */
-/*           PRODUKTY / ESHOP     */
-/* ============================= */
+
 .eshop-container {
 	max-width: 1200px;
 	margin: 50px auto;
 	padding: 0 20px;
 	text-align: center;
+	margin-top: 120px;
 }
 
 .filter-bar {
@@ -302,7 +296,7 @@ main {
 	box-shadow: 0 5px 18px rgba(0, 0, 0, 0.15);
 }
 
-/* MODÁLNÍ KOŠÍK */
+
 .modal {
 	display: none;
 	position: fixed;
@@ -333,19 +327,37 @@ main {
 	max-height: 1000px;
 }
 
-/* Zabrání tomu, aby modal přetekl přes obrazovku */
+
 .modal-content {
-    max-height: 85vh;
-    overflow-y: auto;
+	max-height: 85vh;
+	overflow-y: auto;
 }
 
-/* Tabulka se při větším množství položek stane scrollovací oblastí */
+
 .kosik-table {
-    max-height: 50vh;
-    overflow-y: auto;
-    display: block;
+	max-height: 50vh;
+	overflow-y: auto;
+
 }
 
+#kosik-btn {
+	position: fixed;
+	top: 17px;
+	z-index: 9999;
+	width: 200px;
+	height: 48px;
+	font-size: 20px;
+	padding: 0;
+	border: none;
+	border-radius: 0px;
+	right: 20%;
+	background-color: rgb(255, 255, 255);
+	border-radius: 20px;
+}
+
+#kosik-btn:hover {
+	color: rgb(91, 91, 190);
+}
 
 
 .kosik-table th,
@@ -353,6 +365,7 @@ main {
 	border-bottom: 1px solid #ddd;
 	padding: 10px;
 	text-align: left;
+
 }
 
 .kosik-table input[type="number"] {
@@ -398,9 +411,7 @@ main {
 	text-align: right;
 }
 
-/* ============================= */
-/*       TEXTOVÉ SEKCE           */
-/* ============================= */
+
 
 .products {
 	margin-top: 75px;
@@ -473,9 +484,7 @@ main {
 	line-height: 1.8;
 }
 
-/* ============================= */
-/*             FAQ               */
-/* ============================= */
+
 .faq {
 	background: #f0f2f5;
 	padding: 6rem 2rem;
@@ -509,9 +518,7 @@ main {
 	font-weight: 600;
 }
 
-/* ============================= */
-/*           KONTAKT             */
-/* ============================= */
+
 .contact {
 	padding: 6rem 2rem;
 	text-align: center;
@@ -570,9 +577,7 @@ textarea:focus {
 	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
-/* ============================= */
-/*           FOOTER              */
-/* ============================= */
+
 .footer {
 	background-color: #222;
 	color: #ddd;
@@ -619,9 +624,7 @@ textarea:focus {
 	flex-wrap: wrap;
 }
 
-/* ============================= */
-/*         O NÁS / ABOUT PAGE    */
-/* ============================= */
+
 .about-page {
 	padding: 6rem 2rem;
 	background-color: #f7f8fa;
@@ -741,12 +744,9 @@ textarea:focus {
 	margin-top: 50px;
 }
 
-/* ============================= */
-/*        RESPONSIVITA           */
-/* ============================= */
 @media (max-width: 992px) {
 	.header {
-		flex-direction: column;
+		flex-direction: row;
 		height: auto;
 		padding: 20px 2rem;
 	}
@@ -816,13 +816,13 @@ textarea:focus {
 	}
 }
 
-/* ==== Kontakt – styl sekce ==== */
 
 .contact-page {
 	display: flex;
 	justify-content: center;
 	padding: 40px 20px;
 	background-color: #f8f9fa;
+	margin-top: 80px;
 }
 
 .contact-page .contact-container {
@@ -913,7 +913,6 @@ textarea:focus {
 	text-decoration: underline;
 }
 
-/* Responzivita */
 @media (max-width: 900px) {
 	.contact-page .contact-container {
 		grid-template-columns: 1fr;
@@ -928,14 +927,6 @@ textarea:focus {
 	}
 }
 
-/* ============================= */
-/*    ADDITIONS FOR HOMEPAGE     */
-/*  (hero-text, why-us, faq JS)  */
-/* ============================= */
-
-/* Hero text overlay */
-
-/* Button primary (consistent with other buttons but styled for hero CTA) */
 .btn-primary {
 	display: inline-block;
 	padding: 12px 28px;
@@ -954,7 +945,7 @@ textarea:focus {
 	box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
 }
 
-/* Why us section */
+
 .why-us {
 	text-align: center;
 	padding: 5.5rem 1.5rem;
@@ -1012,7 +1003,7 @@ textarea:focus {
 	margin-bottom: 8px;
 }
 
-/* FAQ accordion */
+
 .faq-item {
 	max-width: 820px;
 	margin: 1rem auto;
@@ -1055,7 +1046,7 @@ textarea:focus {
 	opacity: 1;
 }
 
-/* CTA contact */
+
 .contact-cta {
 	text-align: center;
 	background: linear-gradient(135deg, #1abc9c 0%, #16a085 100%);
@@ -1075,9 +1066,7 @@ textarea:focus {
 	color: rgba(255, 255, 255, 0.95);
 }
 
-/* Animations / scroll reveal */
 
-/* small helper to ensure hero overlay stays readable on small screens */
 @media (max-width: 900px) {
 	.hero-text {
 		left: 5%;
@@ -1110,7 +1099,7 @@ textarea:focus {
 	}
 }
 
-/* Accessibility / focus outlines */
+
 a:focus,
 button:focus,
 input:focus,
@@ -1119,22 +1108,17 @@ textarea:focus {
 	outline-offset: 2px;
 }
 
-/* === FIX hover tlačítka ve slideru === */
 .slides {
 	position: relative;
-
-	/* přestane blokovat hovery */
 }
 
 .slides * {
 	pointer-events: auto;
-	/* ale uvnitř, např. tlačítko, funguje klik */
 }
 
 .slide a.button {
 	position: relative;
 	z-index: 10;
-	/* zajistí, že je nad případným overlayem */
 	pointer-events: auto;
 	display: inline-block;
 	transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
@@ -1177,26 +1161,30 @@ textarea:focus {
 	}
 }
 
-/* ============================= */
-/*   MAX 992px (VŠE SLOUČENO)   */
-/* ============================= */
 
 @media (max-width: 992px) {
 
-	/* hamburger zobrazit */
+	.contact-page{
+		margin-top: 
+		50px;
+	}
+
+	.kosik-table th,
+	.kosik-table td {
+		font-size: 10px;
+	}
 	.menu-toggle {
 		display: flex;
 	}
-
-	/* hlavní header */
 	.header {
 		padding: 15px 20px;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 		height: auto;
-		flex-direction: column;
+		flex-direction: row;
 		text-align: center;
+		height: 50px;
 	}
 
 	.header__logo-section {
@@ -1206,11 +1194,10 @@ textarea:focus {
 	}
 
 	.header__logo-section img {
-		max-width: 140px;
+		width: 10px;
 		height: auto;
 	}
 
-	/* výchozí stav menu – skryté */
 	.header__links-section {
 		position: absolute;
 		top: 90px;
@@ -1237,14 +1224,11 @@ textarea:focus {
 		font-size: 18px;
 	}
 
-	/* otevřené menu */
 	.header__links-section.open {
 		padding: 30px 0;
 		max-height: 400px;
 		opacity: 1;
 	}
-
-	/* zbytek tvých původních 992px stylů */
 
 	.header__links-section {
 		flex-wrap: wrap;
@@ -1314,9 +1298,6 @@ textarea:focus {
 	}
 }
 
-/* ============================= */
-/*   MOBIL max 768px             */
-/* ============================= */
 
 @media (max-width: 768px) {
 
@@ -1325,20 +1306,22 @@ textarea:focus {
 	}
 
 	.header__logo-section img {
-		width: 45px;
+		width: 30px;
 	}
 
 	.hero {
+
 		height: 60vh;
 		justify-content: center;
 		padding: 0 1.5rem;
 	}
 
+	.slides {
+		margin-top: 100px;
+	}
+
 	.slogan_text {
-		padding: 18px 24px;
-		font-size: clamp(20px, 3vw, 28px);
-		text-align: center;
-		margin: 50px auto 0;
+		display: none;
 	}
 
 	.slide a.button {
@@ -1408,10 +1391,11 @@ textarea:focus {
 	.footer-bottom {
 		font-size: 0.8rem;
 	}
-	.header__links-section{
+
+	.header__links-section {
 		flex-direction: column;
 	}
-	
+
 }
 
 
@@ -1426,10 +1410,6 @@ textarea:focus {
 		gap: 8px;
 	}
 
-	.slogan_text {
-		font-size: clamp(18px, 4vw, 24px);
-		padding: 16px 20px;
-	}
 
 	.slide a.button {
 		padding: 8px 18px;
@@ -1487,7 +1467,7 @@ textarea:focus {
 }
 
 .menu-toggle .bar {
-	width: 28px;
+	width: 30px;
 	height: 3px;
 	background-color: #333;
 	border-radius: 2px;
@@ -1496,7 +1476,7 @@ textarea:focus {
 }
 
 .menu-toggle.active .bar:nth-child(1) {
-	transform: rotate(45deg) translate(6px, 6px);
+	transform: rotate(45deg) translate(6px, 6.25px);
 	animation: BarSize 0.5s ease forwards;
 }
 
@@ -1504,16 +1484,143 @@ textarea:focus {
 	opacity: 0;
 }
 
-.menu-toggle.active .bar:nth-child(3	) {
-	transform: rotate(-45deg) translate(8px, -10px);
+.menu-toggle.active .bar:nth-child(3) {
+	transform: rotate(-45deg) translate(8.75px, -10px);
 	animation: BarSize 0.5s ease forwards;
 }
 
-@keyframes BarSize {
-	to {
-		width: 30px;
-	}
+
+
+body.lock-scroll {
+	overflow: hidden;
 }
+
+.modal-actions {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 15px;
+}
+
+.order-btn {
+	background: #1abc9c;
+	color: white !important;
+	padding: 12px 22px;
+	border-radius: 8px;
+	text-decoration: none;
+	font-weight: 600;
+	transition: 0.25s;
+	box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.order-btn:hover {
+	background: #16a085;
+	transform: translateY(-3px);
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.20);
+}
+
+.order-page {
+	padding: 40px 5%;
+}
+
+.order-wrapper {
+	display: flex;
+	gap: 40px;
+	margin-top: 20px;
+}
+
+.order-summary {
+	display: flex;
+	flex-direction: column;
+	background: white;
+	padding: 25px;
+	border-radius: 12px;
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.order-form {
+	background: white;
+	padding: 25px;
+	border-radius: 12px;
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.order-form,
+.order-summary {
+	width: 50%;
+	display: flex;
+	flex-direction: column;
+}
+
+.order-form form input {
+	width: 500px;
+}
+
+.order-form h2,
+.order-summary h2 {
+	margin-bottom: 20px;
+}
+
+.order-form input,
+.order-form textarea {
+	width: 100%;
+	padding: 10px;
+	margin: 8px 0 18px 0;
+	border-radius: 6px;
+	border: 1px solid #ddd;
+	font-size: 16px;
+}
+
+.order-summary .summary-item {
+	display: flex;
+	align-items: center;
+	gap: 15px;
+	margin-bottom: 15px;
+}
+
+.summary-item img {
+	width: 60px;
+	height: 60px;
+	border-radius: 8px;
+	object-fit: cover;
+}
+
+.item-total {
+	margin-left: auto;
+	font-weight: 600;
+}
+
+.summary-total {
+	font-size: 20px;
+	text-align: right;
+	margin-top: 10px;
+}
+
+.btn-primary {
+	background: #16a085;
+	padding: 12px 20px;
+	color: white;
+	border-radius: 8px;
+	border: none;
+	cursor: pointer;
+	font-size: 18px;
+}
+
+.btn-primary:hover {
+	background: #138d75;
+}
+
+.error {
+	color: red;
+	font-weight: bold;
+}
+
+.order-success {
+	text-align: center;
+	padding: 40px;
+}
+
+
 
 @media (max-width: 992px) {
 
@@ -1521,9 +1628,30 @@ textarea:focus {
 		display: flex;
 	}
 
+	.order-page {
+		margin-top: 50px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.order-form form input {
+		width: 250px;
+	}
+
+	.order-wrapper {
+		flex-direction: column;
+	}
+
+
+	.order-summary,
+	.order-form {
+		width: 300px;
+	}
+
 	.header__links-section {
 		position: absolute;
-		top: 90px;
+		top: 40px;
 		left: 0;
 		width: 100%;
 		background: #ffffff;
@@ -1542,9 +1670,13 @@ textarea:focus {
 			max-height 0.45s ease,
 			opacity 0.3s ease,
 			padding 0.35s ease;
-		z-index: 1000;
+		z-index: 9999;
 	}
 
+
+	.eshop-container {
+		margin-top: 80px;
+	}
 
 	.header__links-section.open {
 		padding: 30px 0;
@@ -1552,6 +1684,21 @@ textarea:focus {
 		max-height: 350px;
 	}
 
+
+	#kosik-btn {
+		position: fixed;
+		top: 0;
+		z-index: 9999;
+		width: 120px;
+		height: 48px;
+		font-size: 15px;
+		padding: 0;
+		border: none;
+		border-radius: 0px;
+		right: 20%;
+		background-color: white;
+		border-radius: 20px;
+	}
 
 	.header__links-section.open a {
 		animation: fadeSlide 0.45s ease forwards;
@@ -1582,128 +1729,3 @@ textarea:focus {
 		}
 	}
 }
-
-body.lock-scroll {
-	overflow: hidden;
-}
-
-.modal-actions {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 15px;
-}
-
-.order-btn {
-    background: #1abc9c;
-    color: white !important;
-    padding: 12px 22px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: 0.25s;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
-}
-
-.order-btn:hover {
-    background: #16a085;
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.20);
-}
-.order-page {
-    padding: 40px 5%;
-}
-
-.order-wrapper {
-    display: flex;
-    gap: 40px;
-    margin-top: 20px;
-}
- .order-summary {
-	display: flex;
-	flex-direction: column;
-    background: white;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
-}
-
-.order-form{
-    background: white;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
-}
-
-.order-form, .order-summary{
-	width: 50%;
-	display: flex;
-	flex-direction: column;
-}
-
-.order-form form input{
-	width: 500px;
-}
-
-.order-form h2,
-.order-summary h2 {
-    margin-bottom: 20px;
-}
-
-.order-form input,
-.order-form textarea {
-    width: 100%;
-    padding: 10px;
-    margin: 8px 0 18px 0;
-    border-radius: 6px;
-    border: 1px solid #ddd;
-    font-size: 16px;
-}
-
-.order-summary .summary-item {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 15px;
-}
-
-.summary-item img {
-    width: 60px;
-    height: 60px;
-    border-radius: 8px;
-    object-fit: cover;
-}
-
-.item-total {
-    margin-left: auto;
-    font-weight: 600;
-}
-
-.summary-total {
-    font-size: 20px;
-    text-align: right;
-    margin-top: 10px;
-}
-
-.btn-primary {
-    background: #16a085;
-    padding: 12px 20px;
-    color: white;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    font-size: 18px;
-}
-.btn-primary:hover {
-    background: #138d75;
-}
-
-.error {
-    color: red;
-    font-weight: bold;
-}
-.order-success {
-    text-align: center;
-    padding: 40px;
-}
-
