@@ -1,4 +1,3 @@
-
 * {
 	box-sizing: border-box;
 	margin: 0;
@@ -412,7 +411,6 @@ main {
 }
 
 
-
 .products {
 	margin-top: 75px;
 	padding-bottom: 100px;
@@ -579,51 +577,107 @@ textarea:focus {
 
 
 .footer {
-	background-color: #222;
-	color: #ddd;
-	padding: 60px 2rem 30px;
+	background-color: #111;
+	color: #fff;
+	padding: 40px 20px 20px;
+	font-family: 'Arial', sans-serif;
 }
 
 .footer-container {
 	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
-	max-width: 1100px;
+	flex-direction: column;
+	align-items: center;
+	max-width: 1200px;
 	margin: 0 auto;
-	gap: 30px;
+	gap: 20px;
 }
 
-.footer h3,
-.footer h4 {
+.footer-logo img {
+	height: 150px;
+	padding: 10px;
+	background-color: white;
+	border-radius: 10px;
+}
+
+.footer-about {
+	max-width: 500px;
+	text-align: center;
+	color: #ccc;
+	font-size: 14px;
+	line-height: 1.5;
+}
+
+.footer-social {
+	display: flex;
+	gap: 20px;
+}
+
+.footer-social .social-icon svg {
+	width: 50px;
+	height: 50px;
+	stroke: #fff;
+	transition: stroke 0.3s;
+}
+
+.footer-social .social-icon:hover svg {
+	stroke: #1da1f2;
+}
+
+.footer-contact {
+	margin-top: 10px;
+}
+
+.footer-contact .contact-link {
+	display: flex;
+	align-items: center;
+	gap: 8px;
 	color: #fff;
-}
-
-.footer a {
-	color: #1abc9c;
 	text-decoration: none;
+	font-weight: bold;
 	transition: color 0.3s;
 }
 
-.footer a:hover {
-	text-decoration: underline;
-	color: #16a085;
+.footer-contact .contact-link svg {
+	width: 24px;
+	height: 24px;
+	stroke: #fff;
+	transition: stroke 0.3s;
+}
+
+.footer-contact .contact-link:hover {
+	color: #ff9800;
+}
+
+.footer-contact .contact-link:hover svg {
+	stroke: #ff9800;
+}
+
+.footer-separator {
+	border: none;
+	height: 1px;
+	background: #333;
+	width: 100%;
+	margin: 30px 0 20px;
 }
 
 .footer-bottom {
 	text-align: center;
-	margin-top: 30px;
-	font-size: 0.9rem;
+	font-size: 14px;
 	color: #aaa;
-	border-top: 1px solid #333;
-	padding-top: 15px;
 }
 
-.footer__navigation ul {
-	display: flex;
-	gap: 30px;
-	flex-wrap: wrap;
-}
+@media (min-width: 768px) {
+	.footer-container {
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: flex-start;
+		text-align: left;
+	}
 
+	.footer-about {
+		text-align: left;
+	}
+}
 
 .about-page {
 	padding: 6rem 2rem;
@@ -1164,18 +1218,20 @@ textarea:focus {
 
 @media (max-width: 992px) {
 
-	.contact-page{
-		margin-top: 
-		50px;
+	.contact-page {
+		margin-top:
+			50px;
 	}
 
 	.kosik-table th,
 	.kosik-table td {
 		font-size: 10px;
 	}
+
 	.menu-toggle {
 		display: flex;
 	}
+
 	.header {
 		padding: 15px 20px;
 		display: flex;
@@ -1490,7 +1546,6 @@ textarea:focus {
 }
 
 
-
 body.lock-scroll {
 	overflow: hidden;
 }
@@ -1621,7 +1676,6 @@ body.lock-scroll {
 }
 
 
-
 @media (max-width: 992px) {
 
 	.menu-toggle {
@@ -1728,4 +1782,40 @@ body.lock-scroll {
 			transform: translateY(0);
 		}
 	}
+}
+
+#kosik-btn.animate {
+	animation: bounce 0.4s ease;
+}
+
+@keyframes bounce {
+	0% {
+		transform: scale(1);
+	}
+
+	30% {
+		transform: scale(1.15);
+	}
+
+	60% {
+		transform: scale(0.95);
+	}
+
+	100% {
+		transform: scale(1);
+	}
+}
+
+.kosik-thumb {
+	width: 42px;
+	height: 42px;
+	border-radius: 8px;
+	object-fit: cover;
+	margin-right: 10px;
+	vertical-align: middle;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.kosik-table td span {
+	vertical-align: middle;
 }

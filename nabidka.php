@@ -3,19 +3,12 @@ error_reporting(E_ALL);
 ini_set("display_errors", 1);
 session_start();
 
-/* ==============================
-   KONFIGURACE A DATA PRODUKTŮ
-============================== */
 $jsonPath = __DIR__ . "/produkty.json";
 if (!file_exists($jsonPath)) die("Chybí soubor produkty.json");
 $produkty = json_decode(file_get_contents($jsonPath), true);
 if (!is_array($produkty)) die("Chybný formát JSON");
 
 if (!isset($_SESSION["kosik"])) $_SESSION["kosik"] = [];
-
-/* ==============================
-   AJAX API pro košík (vrací JSON)
-============================== */
 if (isset($_POST["ajax"])) {
     error_reporting(0);
     ini_set("display_errors", 0);
@@ -53,7 +46,6 @@ if (isset($_POST["ajax"])) {
             break;
     }
 
-    // Součet všech kusů (ne jen druhů)
     $celkovyPocet = array_sum(array_column($_SESSION["kosik"], "mnozstvi"));
     $celkovaCena = array_sum(array_map(fn($p) => $p["produkt"]["cena"] * $p["mnozstvi"], $_SESSION["kosik"]));
 
@@ -65,9 +57,6 @@ if (isset($_POST["ajax"])) {
     exit;
 }
 
-/* ==============================
-   STRÁNKA - NABÍDKA
-============================== */
 $page = 'nabidka';
 include "includes/header.php";
 ?>
@@ -148,125 +137,6 @@ include "includes/header.php";
     </div>
 </div>
 
-<script>
 
-async function updateKosik(data) {
-    const res = await fetch(window.location.pathname, {
-        method: 'POST',
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-        body: new URLSearchParams(data)
-    });
-    return res.json();
-}
-
-
-const kosikBtn = document.getElementById('kosik-btn');
-const kosikModal = document.getElementById('kosik-modal');
-const kosikBody = kosikModal.querySelector('.kosik-table tbody');
-const celkemEl = document.querySelector('.celkem strong');
-
-document.getElementById('filter').addEventListener('change', function() {
-    const kat = this.value;
-    document.querySelectorAll('.produkt-card').forEach(card => {
-        card.style.display = (kat === 'vse' || card.dataset.kategorie === kat) ? 'flex' : 'none';
-    });
-});
-
-kosikBtn.addEventListener('click', async () => {
-    kosikModal.style.display = 'flex';
-    const data = await updateKosik({ajax: 'get'});
-    refreshKosik(data);
-});
-document.getElementById('close-modal').addEventListener('click', () => kosikModal.style.display = 'none');
-
-document.querySelectorAll('.add-form').forEach(form => {
-    form.addEventListener('submit', async e => {
-        e.preventDefault();
-        const id = form.querySelector('[name="id"]').value;
-        const data = await updateKosik({ajax: 'add', id});
-        refreshKosik(data);
-        kosikBtn.classList.add('animate');
-        setTimeout(() => kosikBtn.classList.remove('animate'), 400);
-    });
-});
-
-document.addEventListener('click', async e => {
-    if (e.target.classList.contains('remove-btn')) {
-        e.preventDefault();
-        const id = e.target.value;
-        const data = await updateKosik({ajax: 'remove', id});
-        refreshKosik(data);
-    }
-});
-
-document.addEventListener('input', async e => {
-    if (e.target.matches('.kosik-table input[type="number"]')) {
-        const id = e.target.name.match(/\d+/)[0];
-        const mnozstvi = e.target.value;
-        const data = await updateKosik({ajax: 'update', id, mnozstvi});
-        refreshKosik(data);
-    }
-});
-
-function refreshKosik(data) {
-    kosikBody.innerHTML = '';
-    for (const [id, p] of Object.entries(data.polozky)) {
-        const cena = p.produkt.cena * p.mnozstvi;
-        const obrazek = p.produkt.obrazek ? `<img src="${p.produkt.obrazek}" alt="" class="kosik-thumb">` : '';
-        kosikBody.innerHTML += `
-          <tr>
-            <td>${obrazek}<span>${p.produkt.nazev}</span></td>
-            <td><input type="number" name="mnozstvi[${id}]" value="${p.mnozstvi}" min="1"></td>
-            <td>${cena.toLocaleString('cs-CZ', {minimumFractionDigits: 2})} Kč</td>
-            <td><button class="remove-btn" value="${id}">✕</button></td>
-          </tr>`;
-    }
-    celkemEl.textContent = data.celkem.toLocaleString('cs-CZ', {minimumFractionDigits: 2}) + ' Kč';
-    kosikBtn.innerHTML = `🛒 Zobrazit košík (${data.pocet})`;
-}
-
-const detailModal = document.getElementById('detail-modal');
-const detailTitle = document.getElementById('detail-title');
-const detailText = document.getElementById('detail-text');
-const detailImg = document.getElementById('detail-img');
-
-document.querySelectorAll('.detail-btn').forEach(btn => {
-    btn.addEventListener('click', e => {
-        const card = e.target.closest('.produkt-card');
-        detailTitle.textContent = card.querySelector('h3').textContent;
-        detailText.textContent = card.dataset.detaily || "Bez detailů.";
-        const imgEl = card.querySelector('.produkt-img');
-        detailImg.src = imgEl ? imgEl.src : '';
-        detailImg.style.display = imgEl ? 'block' : 'none';
-        detailModal.style.display = 'flex';
-    });
-});
-document.getElementById('close-detail').addEventListener('click', () => detailModal.style.display = 'none');
-</script>
-
-<style>
-#kosik-btn.animate {
-  animation: bounce 0.4s ease;
-}
-@keyframes bounce {
-  0% { transform: scale(1); }
-  30% { transform: scale(1.15); }
-  60% { transform: scale(0.95); }
-  100% { transform: scale(1); }
-}
-
-.kosik-thumb {
-  width: 42px;
-  height: 42px;
-  border-radius: 8px;
-  object-fit: cover;
-  margin-right: 10px;
-  vertical-align: middle;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-}
-.kosik-table td span {
-  vertical-align: middle;
-}
-</style>
 
 <?php include "includes/footer.php"; ?>

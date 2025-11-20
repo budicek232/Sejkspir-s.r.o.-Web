@@ -5,7 +5,6 @@ include "includes/header.php";
 
 <main>
 
-
   <section class="hero">
     <div class="slides"></div>
     <div class="indicators"></div>
